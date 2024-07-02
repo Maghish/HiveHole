@@ -3,6 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+import exampleRoute from "./routes/example.route";
+
 dotenv.config();
 const app = express();
 
@@ -12,6 +14,8 @@ app.use(
     origin: "*",
   })
 );
+
+app.use("/", exampleRoute);
 
 mongoose.connect(process.env.MONGOURI!).then(() => {
   console.log("Connected to MongoDB");
