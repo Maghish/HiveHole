@@ -3,7 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-import exampleRoute from "./routes/example.route";
+import hiveRoute from "./routes/hive.route";
 
 dotenv.config();
 const app = express();
@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-app.use("/", exampleRoute)
+app.use("/api/hive", hiveRoute);
 
 mongoose.connect(process.env.MONGOURI!).then(() => {
   console.log("Connected to MongoDB");
