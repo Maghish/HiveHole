@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-app.use("/", exampleRoute);
+app.use("/", exampleRoute)
 
 mongoose.connect(process.env.MONGOURI!).then(() => {
   console.log("Connected to MongoDB");
