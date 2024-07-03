@@ -3,8 +3,8 @@ import HiveModel from "../models/hive.model";
 
 async function getHive(req: Request, res: Response): Promise<Response> {
   try {
-    const hiveName = req.params.name;
-    const hive = await HiveModel.findOne({ name: hiveName });
+    const name = req.params.name;
+    const hive = await HiveModel.findOne({ name: name });
 
     if (hive) {
       return res
@@ -19,8 +19,36 @@ async function getHive(req: Request, res: Response): Promise<Response> {
       .json({ message: `Unexpected error occurred: ${error.message}` });
   }
 }
-async function createHive(req: Request, res: Response) {
+
+async function createHive(req: Request, res: Response): Promise<Response> {
   try {
+    const { displayName, name, description, tags } = req.body;
+    if (!displayName) {
+      const displayName = name;
+    }
+
+    const hiveName = name.toLowerCase().replace(" ", "");
+
+    const checkHive = await HiveModel.findOne({ name: hiveName });
+    if (checkHive) {
+      return res
+        .status(400)
+        .json({ message: `Hive already exists with the name: ${hiveName}` });
+    }
+
+    let hive = new HiveModel({
+      displayName: displayName,
+      name: hiveName,
+      description: description,
+      tags: tags,
+      members: [],
+    });
+
+    hive = await hive.save();
+    return res.status(200).json({
+      message: `Successfully created hive: ${displayName}`,
+      hive: hive,
+    });
   } catch (error: any) {
     return res
       .status(400)
