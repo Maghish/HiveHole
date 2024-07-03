@@ -1,7 +1,11 @@
-export default function Home() {
+"use server";
+
+export default async function Home() {
+  const url = process.env.SERVERURL;
+
   return (
     <main>
-      <p>Hello!</p>
+      <p>{url}</p>
     </main>
   );
 }
