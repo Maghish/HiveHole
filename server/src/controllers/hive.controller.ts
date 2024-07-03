@@ -1,7 +1,16 @@
 import { Request, Response } from "express";
+import HiveModel from "../models/hive.model";
 
 async function getHive(req: Request, res: Response) {
   try {
+    const hiveName = req.params.name;
+    const hive = await HiveModel.findOne({ name: hiveName });
+
+    if (hive) {
+      return res
+        .status(200)
+        .json({ message: "Successfully found the hive", hive: hive });
+    }
   } catch (error: any) {
     return res
       .status(400)
