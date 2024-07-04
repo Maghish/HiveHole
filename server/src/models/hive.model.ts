@@ -1,15 +1,13 @@
 import mongoose from "mongoose";
 
-const Schema = mongoose.Schema;
-
-const hiveSchema = new Schema(
+const hiveSchema = new mongoose.Schema(
   {
     displayName: { type: String, required: true, maxLength: 50 },
     name: { type: String, required: true, maxLength: 30 },
     description: { type: String, required: true, maxLength: 300 },
     tags: [{ type: String }],
-    // IDS of the members
-    members: [{ type: Number }],
+    // The username of the members
+    members: [{ type: String }],
   },
   {
     timestamps: true,
