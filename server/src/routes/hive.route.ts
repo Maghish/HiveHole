@@ -14,7 +14,7 @@ const router = Router();
 
 router.get("/gethive/:name", getHive);
 router.post("/createhive", createHive);
-router.post("/updatehive", updateHive);
+router.post("/updatehive/:name", updateHive);
 router.post("/deletehive", deleteHive);
 router.post("/addhivemember", addHiveMember);
 router.post("/removehivemember", removeHiveMember);
