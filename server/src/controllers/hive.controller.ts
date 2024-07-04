@@ -89,8 +89,15 @@ async function updateHive(req: Request, res: Response): Promise<Response> {
       .json({ message: `Unexpected error occurred: ${error.message}` });
   }
 }
-async function deleteHive(req: Request, res: Response) {
+
+async function deleteHive(req: Request, res: Response): Promise<Response> {
   try {
+    const name = req.params.name;
+    const hive = await HiveModel.findOneAndDelete({ name: name });
+    if (!hive) {
+      return res.status(404).json({ message: "Couldn't find the Hive!" });
+    }
+    return res.status(200).json({ message: `Successfully deleted ${name}` });
   } catch (error: any) {
     return res
       .status(400)
