@@ -134,8 +134,37 @@ async function addHiveMember(req: Request, res: Response): Promise<Response> {
   }
 }
 
-async function removeHiveMember(req: Request, res: Response) {
+async function removeHiveMember(
+  req: Request,
+  res: Response
+): Promise<Response> {
   try {
+    const name = req.params.name;
+    const { username } = req.body;
+    let hive = await HiveModel.findOne({ name: name });
+    if (!hive) {
+      return res.status(404).json({ message: "Couldn't find the Hive!" });
+    }
+
+    const user = await UserModel.findOne({ username: username });
+    if (!user) {
+      return res.status(404).json({ message: "Couldn't find the user!" });
+    }
+
+    if (!hive.members.includes(username)) {
+      return res
+        .status(400)
+        .json({ message: "The user doesn't exist on the hive!" });
+    }
+
+    const memberIndex = hive.members.indexOf(username);
+    hive.members.splice(memberIndex, 1);
+    hive = await hive.save();
+
+    return res.status(200).json({
+      messsage: `Successfully removed ${username} from ${name}`,
+      hive: hive,
+    });
   } catch (error: any) {
     return res
       .status(400)

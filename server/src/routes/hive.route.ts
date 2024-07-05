@@ -17,6 +17,6 @@ router.post("/createhive", createHive);
 router.post("/updatehive/:name", updateHive);
 router.delete("/deletehive/:name", deleteHive);
 router.post("/addhivemember/:name", addHiveMember);
-router.post("/removehivemember", removeHiveMember);
+router.post("/removehivemember/:name", removeHiveMember);
 
 export default router;
