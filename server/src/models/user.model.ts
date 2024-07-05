@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
     // The username of the following people
     following: [{ type: String }],
     onlineStatus: {
-      type: "Online" || "Do Not Disturb" || "Offline",
+      type: String, // Online || Offline || Do Not Disturb
       default: "Offline",
     },
     status: { type: String, maxLength: 100 },
