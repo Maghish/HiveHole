@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import HiveModel from "../models/hive.model";
+import UserModel from "../models/user.model";
 
 async function getHive(req: Request, res: Response): Promise<Response> {
   try {
@@ -104,14 +105,35 @@ async function deleteHive(req: Request, res: Response): Promise<Response> {
       .json({ message: `Unexpected error occurred: ${error.message}` });
   }
 }
-async function addHiveMember(req: Request, res: Response) {
+async function addHiveMember(req: Request, res: Response): Promise<Response> {
   try {
+    const name = req.params.name;
+    const { username } = req.body;
+    let hive = await HiveModel.findOne({ name: name });
+    if (!hive) {
+      return res.status(404).json({ message: "Couldn't find the Hive!" });
+    }
+
+    const user = await UserModel.findOne({ username: username });
+    if (!user) {
+      return res.status(404).json({ message: "Couldn't find the user!" });
+    }
+
+    if (hive.members.includes(username)) {
+      return res.status(400).json({ message: "User is already in the hive!" });
+    }
+
+    hive.members = [...hive.members, username];
+    hive = await hive.save();
+
+    return res.status(200).json({ message: `Successfully added`, hive: hive });
   } catch (error: any) {
     return res
       .status(400)
       .json({ message: `Unexpected error occurred: ${error.message}` });
   }
 }
+
 async function removeHiveMember(req: Request, res: Response) {
   try {
   } catch (error: any) {
