@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import hiveRoute from "./routes/hive.route";
+import userRoute from "./routes/user.route";
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ app.use(
 );
 
 app.use("/api/hive", hiveRoute);
+app.use("/api/user", userRoute);
 
 mongoose.connect(process.env.MONGOURI!).then(() => {
   console.log("Connected to MongoDB");
