@@ -2,6 +2,12 @@ import { Request, Response } from "express";
 import HiveModel from "../models/hive.model";
 import UserModel from "../models/user.model";
 
+/**
+ * Get the hive using it's name
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<Response>}
+ */
 async function getHive(req: Request, res: Response): Promise<Response> {
   try {
     const name = req.params.name;
@@ -21,6 +27,12 @@ async function getHive(req: Request, res: Response): Promise<Response> {
   }
 }
 
+/**
+ * Create a hive with the given arguments
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<Response>}
+ */
 async function createHive(req: Request, res: Response): Promise<Response> {
   try {
     const { displayName, name, description, tags } = req.body;
@@ -57,6 +69,12 @@ async function createHive(req: Request, res: Response): Promise<Response> {
   }
 }
 
+/**
+ * Update the hive using it's name with the given arguments
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<Response>}
+ */
 async function updateHive(req: Request, res: Response): Promise<Response> {
   try {
     const name = req.params.name;
@@ -91,6 +109,12 @@ async function updateHive(req: Request, res: Response): Promise<Response> {
   }
 }
 
+/**
+ * Delete the hive using it's name
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<Response>}
+ */
 async function deleteHive(req: Request, res: Response): Promise<Response> {
   try {
     const name = req.params.name;
@@ -105,6 +129,13 @@ async function deleteHive(req: Request, res: Response): Promise<Response> {
       .json({ message: `Unexpected error occurred: ${error.message}` });
   }
 }
+
+/**
+ * Add the given user to the hive using the given name
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<Response>}
+ */
 async function addHiveMember(req: Request, res: Response): Promise<Response> {
   try {
     const name = req.params.name;
@@ -134,6 +165,12 @@ async function addHiveMember(req: Request, res: Response): Promise<Response> {
   }
 }
 
+/**
+ * Remove the given user from the hive using the given name
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<Response>}
+ */
 async function removeHiveMember(
   req: Request,
   res: Response
