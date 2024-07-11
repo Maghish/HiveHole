@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    displayName: { type: String, required: true, maxLength: 50 },
-    username: { type: String, required: true, maxLength: 30 },
+    displayName: { type: String, required: true, maxLength: 16 },
+    username: { type: String, required: true, maxLength: 12 },
     email: { type: String, required: true, maxLength: 30 },
-    password: { type: String, required: true, maxLength: 40 },
+    password: { type: String, required: true },
     bio: { type: String, required: true, maxLength: 200 },
     // Profile photo URL, not the actual file
     profilePhoto: { type: String, required: false, default: "" },
