@@ -17,29 +17,26 @@ async function signupUser(req: Request, res: Response): Promise<Response> {
   try {
     const { displayName, username, email, password } = req.body;
 
-    UserModel.findOne({ username: username }).then((response) => {
-      if (response) {
-        return res.status(400).json({
-          message:
-            "The username is already taken, please enter a different one",
-        });
-      }
-    });
+    let user = await UserModel.findOne({ username: username });
+    if (user) {
+      return res.status(400).json({
+        message: "The username is already taken, please enter a different one",
+      });
+    }
 
-    UserModel.findOne({ email: email }).then((response) => {
-      if (response) {
-        return res.status(400).json({
-          message:
-            "User already exists with the same email, please try to login or try a different email",
-        });
-      }
-    });
+    user = await UserModel.findOne({ email: email });
+    if (user) {
+      return res.status(400).json({
+        message:
+          "User already exists with the same email, please try to login or try a different email",
+      });
+    }
 
     // Hash Password
     const salt = await genSalt(10);
     const hashedPassword = await hash(password, salt);
 
-    let user = new UserModel({
+    user = new UserModel({
       username: username,
       displayName: displayName,
       email: email,
@@ -63,4 +60,45 @@ async function signupUser(req: Request, res: Response): Promise<Response> {
   }
 }
 
-export { signupUser };
+async function loginUser(req: Request, res: Response): Promise<Response> {
+  try {
+    const { username, email, password } = req.body;
+    if (username) {
+      const user = await UserModel.findOne({ username: username });
+      if (user && (await compare(password, user!.password))) {
+        return res.status(200).json({
+          message: "Successfully authenticated user",
+          token: generateToken(user._id),
+          user: user,
+        });
+      } else {
+        return res
+          .status(400)
+          .json({ message: "Incorrect password or email/username" });
+      }
+    } else if (email) {
+      const user = await UserModel.findOne({ email: email });
+      if (user && (await compare(password, user!.password))) {
+        return res.status(200).json({
+          message: "Successfully authenticated user",
+          token: generateToken(user._id),
+          user: user,
+        });
+      } else {
+        return res
+          .status(400)
+          .json({ message: "Incorrect password or email/username" });
+      }
+    }
+
+    return res
+      .status(400)
+      .json({ message: "Please provide the email/username" });
+  } catch (error: any) {
+    return res
+      .status(400)
+      .json({ message: `Unexpected error occurred: ${error.message}` });
+  }
+}
+
+export { signupUser, loginUser };
