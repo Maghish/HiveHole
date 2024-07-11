@@ -63,4 +63,4 @@ async function signupUser(req: Request, res: Response): Promise<Response> {
   }
 }
 
-export default signupUser;
+export { signupUser };
