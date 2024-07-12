@@ -1,12 +1,14 @@
 import { Router } from "express";
-import { getUser } from "../controllers/user.controller";
+import { getUser, getCurrentUser } from "../controllers/user.controller";
+import protect from "../middleware/auth.middleware";
 
 const router = Router();
 
-router.get("/getuser/:username", getUser);
-router.post("/edituser");
-router.get("/getuserfollowings/:username");
-router.post("/followuser");
-router.post("/unfollowuser");
+router.get("/getuser/:username", protect, getUser);
+router.post("/edituser", protect);
+router.get("/getuserfollowings/:username", protect);
+router.post("/followuser", protect);
+router.post("/unfollowuser", protect);
+router.get("/getcurrentuser", protect, getCurrentUser);
 
 export default router;
