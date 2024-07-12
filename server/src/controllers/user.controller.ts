@@ -1,5 +1,24 @@
 import { Request, Response } from "express";
 import UserModel from "../models/user.model";
+import { verify } from "jsonwebtoken";
+
+interface DecodeJWT {
+  id: string;
+}
+
+async function getCurrentUserData(req: Request): Promise<any> {
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = verify(token, process.env.JWT_SECRET!) as DecodeJWT;
+    const user = await UserModel.findById(decoded.id).select("-password");
+    return user;
+  } else {
+    return null;
+  }
+}
 
 /**
  * Gets the user data from the given username
@@ -18,11 +37,28 @@ async function getUser(req: Request, res: Response): Promise<Response> {
     return res
       .status(200)
       .json({ message: "Successfully fetched the user", user: user });
-  } catch (error) {
+  } catch (error: any) {
     return res
       .status(400)
-      .json({ message: `Unexpected error occurred: ${error}` });
+      .json({ message: `Unexpected error occurred: ${error.message}` });
   }
 }
 
-export { getUser };
+async function getCurrentUser(req: Request, res: Response): Promise<Response> {
+  try {
+    const user = await getCurrentUserData(req);
+    if (!user) {
+      return res.status(400).json({ message: "You are not authenticated!" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Succesfully got the current user", user: user });
+  } catch (error: any) {
+    return res
+      .status(400)
+      .json({ message: `Unexpected error occurred: ${error.message}` });
+  }
+}
+
+export { getUser, getCurrentUser, getCurrentUserData };
