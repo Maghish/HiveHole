@@ -3,10 +3,6 @@ import { Request, Response } from "express";
 import { sign, verify } from "jsonwebtoken";
 import { genSalt, hash, compare } from "bcryptjs";
 
-interface DecodeJWT {
-  id: string;
-}
-
 function generateToken(id: any) {
   return sign({ id }, process.env.JWT_SECRET!, {
     expiresIn: "30d",
