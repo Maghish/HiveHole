@@ -5,6 +5,8 @@ const hiveSchema = new mongoose.Schema(
     displayName: { type: String, required: true, maxLength: 50 },
     name: { type: String, required: true, maxLength: 30 },
     description: { type: String, required: true, maxLength: 300 },
+    // The user's username
+    owner: { type: String, required: true },
     tags: [{ type: String }],
     // The username of the members
     members: [{ type: String }],
