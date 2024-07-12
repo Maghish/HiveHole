@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import HiveModel from "../models/hive.model";
 import UserModel from "../models/user.model";
+import { getCurrentUserData } from "./user.controller";
 
 /**
  * Get the hive using it's name
@@ -40,6 +41,7 @@ async function createHive(req: Request, res: Response): Promise<Response> {
       const displayName = name;
     }
 
+    const owner = await getCurrentUserData(req);
     const hiveName = name.toLowerCase().replace(" ", "");
 
     const checkHive = await HiveModel.findOne({ name: hiveName });
@@ -54,6 +56,7 @@ async function createHive(req: Request, res: Response): Promise<Response> {
       name: hiveName,
       description: description,
       tags: tags,
+      owner: owner.username,
       members: [],
     });
 
