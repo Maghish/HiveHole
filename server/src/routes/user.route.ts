@@ -6,8 +6,7 @@ const router = Router();
 
 router.get("/getuser/:username", protect, getUser);
 router.post("/edituser", protect);
-router.get("/getuserfollowings/:username", protect);
-router.post("/followuser", protect);
+router.post("/followuser/:username", protect);
 router.post("/unfollowuser", protect);
 router.get("/getcurrentuser", protect, getCurrentUser);
 
