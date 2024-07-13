@@ -72,4 +72,38 @@ async function getCurrentUser(req: Request, res: Response): Promise<Response> {
   }
 }
 
-export { getUser, getCurrentUser, getCurrentUserData };
+/**
+ * Assigns the current user to follow the given user
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<import("express").Response>}
+ */
+async function followUser(req: Request, res: Response): Promise<Response> {
+  try {
+    const targetUsername = req.params.username;
+    let target = await UserModel.findOne({ username: targetUsername });
+    if (!target) {
+      return res.status(404).json({ message: "Could not find the user!" });
+    }
+
+    // User can not be null or undefined, because this route is protected by the "protect" middleware, hence the current user will always be true
+    let user = await getCurrentUserData(req);
+
+    target.followers! += 1;
+    user.following = [...user.following, target.username];
+
+    target = await target.save();
+    user = await user.save();
+
+    return res.status(200).json({
+      message: `${user.displayName} is now following ${target.displayName}`,
+      user: user,
+    });
+  } catch (error: any) {
+    return res
+      .status(400)
+      .json({ message: `Unexpected error occurred: ${error.message}` });
+  }
+}
+
+export { getUser, getCurrentUser, getCurrentUserData, followUser };
