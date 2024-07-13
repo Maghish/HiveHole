@@ -6,7 +6,12 @@ interface DecodeJWT {
   id: string;
 }
 
-async function getCurrentUserData(req: Request): Promise<any> {
+/**
+ * Checks the request parameters and sorts out the authentication token, and finally checks if it's valid and returns the user or null
+ * @param {import("express").Request} req
+ * @returns {Promise<any | null>}
+ */
+async function getCurrentUserData(req: Request): Promise<any | null> {
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -44,6 +49,12 @@ async function getUser(req: Request, res: Response): Promise<Response> {
   }
 }
 
+/**
+ * Fetches the currently logged in user account's information
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<import("express").Response>}
+ */
 async function getCurrentUser(req: Request, res: Response): Promise<Response> {
   try {
     const user = await getCurrentUserData(req);
