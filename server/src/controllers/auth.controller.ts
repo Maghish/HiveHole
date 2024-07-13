@@ -3,12 +3,23 @@ import { Request, Response } from "express";
 import { sign, verify } from "jsonwebtoken";
 import { genSalt, hash, compare } from "bcryptjs";
 
+/**
+ * Generates a JWT token from the given id
+ * @param {any} id
+ * @returns
+ */
 function generateToken(id: any) {
   return sign({ id }, process.env.JWT_SECRET!, {
     expiresIn: "30d",
   });
 }
 
+/**
+ * Signs up the user, and returns a new JWT token for authentication
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<import("express").Response>}
+ */
 async function signupUser(req: Request, res: Response): Promise<Response> {
   try {
     const { displayName, username, email, password } = req.body;
@@ -56,6 +67,12 @@ async function signupUser(req: Request, res: Response): Promise<Response> {
   }
 }
 
+/**
+ * Authenticates the user using the given JWT token
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<import("express").Response>}
+ */
 async function loginUser(req: Request, res: Response): Promise<Response> {
   try {
     const { username, email, password } = req.body;
