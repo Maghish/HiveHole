@@ -95,7 +95,7 @@ async function updateHive(req: Request, res: Response): Promise<Response> {
         hive.moderators.includes(user.username) === false
       ) {
         return res.status(400).json({
-          message: "You don't have permissions to edit the hive details",
+          message: "You don't have permissions to edit the hive details!",
         });
       }
 
@@ -132,11 +132,22 @@ async function updateHive(req: Request, res: Response): Promise<Response> {
  */
 async function deleteHive(req: Request, res: Response): Promise<Response> {
   try {
+    const user = await getCurrentUserData(req);
+
     const name = req.params.name;
-    const hive = await HiveModel.findOneAndDelete({ name: name });
+    const hive = await HiveModel.findOne({ name: name });
     if (!hive) {
       return res.status(404).json({ message: "Couldn't find the Hive!" });
     }
+
+    if (hive.owner !== user.username) {
+      return res
+        .status(400)
+        .json({ message: "You don't have permissions to delete the hive!" });
+    }
+
+    await HiveModel.deleteOne({ name: name });
+
     return res.status(200).json({ message: `Successfully deleted ${name}` });
   } catch (error: any) {
     return res
