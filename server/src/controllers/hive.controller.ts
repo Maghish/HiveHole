@@ -81,13 +81,24 @@ async function createHive(req: Request, res: Response): Promise<Response> {
  */
 async function updateHive(req: Request, res: Response): Promise<Response> {
   try {
+    const user = await getCurrentUserData(req);
+
     const name = req.params.name;
     const { displayName, description, tags } = req.body;
 
     let hive = await HiveModel.findOne({ name: name });
 
-    //? Could have reduced the number of conditions but is it necessary to provie the certain attributes are not null for the typescript
+    //? Could have reduced the number of conditions but is it necessary to provide the certain attributes are not null for the typescript
     if (hive) {
+      if (
+        hive.owner !== user.username &&
+        hive.moderators.includes(user.username) === false
+      ) {
+        return res.status(400).json({
+          message: "You don't have permissions to edit the hive details",
+        });
+      }
+
       if (displayName) {
         hive.displayName = displayName;
       }
