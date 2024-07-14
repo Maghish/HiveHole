@@ -57,6 +57,7 @@ async function createHive(req: Request, res: Response): Promise<Response> {
       description: description,
       tags: tags,
       owner: owner.username,
+      moderators: [],
       members: [],
     });
 
