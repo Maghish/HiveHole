@@ -140,6 +140,7 @@ async function deleteHive(req: Request, res: Response): Promise<Response> {
       return res.status(404).json({ message: "Couldn't find the Hive!" });
     }
 
+    // Only the server owner can delete the hive
     if (hive.owner !== user.username) {
       return res
         .status(400)
