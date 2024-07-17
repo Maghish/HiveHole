@@ -90,6 +90,13 @@ async function followUser(req: Request, res: Response): Promise<Response> {
     let user = await getCurrentUserData(req);
 
     target.followers! += 1;
+    if (user.following.includes(target.username)) {
+      return res
+        .status(400)
+        .json({
+          message: `${user.displayName} is already following ${target.displayName}`,
+        });
+    }
     user.following = [...user.following, target.username];
 
     target = await target.save();
