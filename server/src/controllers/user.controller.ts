@@ -89,14 +89,12 @@ async function followUser(req: Request, res: Response): Promise<Response> {
     // User can not be null or undefined, because this route is protected by the "protect" middleware, hence the current user will always be true
     let user = await getCurrentUserData(req);
 
-    target.followers! += 1;
     if (user.following.includes(target.username)) {
-      return res
-        .status(400)
-        .json({
-          message: `${user.displayName} is already following ${target.displayName}`,
-        });
+      return res.status(400).json({
+        message: `${user.displayName} is already following ${target.displayName}`,
+      });
     }
+    target.followers! += 1;
     user.following = [...user.following, target.username];
 
     target = await target.save();
