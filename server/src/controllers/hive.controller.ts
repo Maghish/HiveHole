@@ -11,7 +11,10 @@ import { getCurrentUserData } from "./user.controller";
  */
 async function getHive(req: Request, res: Response): Promise<Response> {
   try {
-    const name = req.params.name;
+    var name = req.params.name;
+    // prettier-ignore
+    if (!name) { return res.status(404).json({ message: "Please provide a valid name like /api/hive/gethive/<name>" }) }
+    name = name.toLowerCase();
     const hive = await HiveModel.findOne({ name: name });
 
     if (hive) {
@@ -40,6 +43,13 @@ async function createHive(req: Request, res: Response): Promise<Response> {
     if (!displayName) {
       const displayName = name;
     }
+
+    // prettier-ignore
+    if (!name) { return res.status(400).json({ message: "The attribute name is missing, please provide valid arguments" }) }
+    // prettier-ignore
+    if (!description) { return res.status(400).json({ message: "The attribute description is missing, please provide valid arguments" }) }
+    // prettier-ignore
+    if (!tags) { return res.status(400).json({ message: "The attribute tags is missing, please provide valid arguments" }) }
 
     const owner = await getCurrentUserData(req);
     const hiveName = name.toLowerCase().replace(" ", "");
