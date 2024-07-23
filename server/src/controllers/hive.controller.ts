@@ -94,6 +94,9 @@ async function updateHive(req: Request, res: Response): Promise<Response> {
     const user = await getCurrentUserData(req);
 
     const name = req.params.name;
+    // prettier-ignore
+    if (!name) { return res.status(404).json({ message: "Please provide a valid name like /api/hive/updatehive/<name>" }) }
+
     const { displayName, description, tags } = req.body;
 
     let hive = await HiveModel.findOne({ name: name });
@@ -145,6 +148,8 @@ async function deleteHive(req: Request, res: Response): Promise<Response> {
     const user = await getCurrentUserData(req);
 
     const name = req.params.name;
+    // prettier-ignore
+    if (!name) { return res.status(404).json({ message: "Please provide a valid name like /api/hive/deletehive/<name>" }) }
     const hive = await HiveModel.findOne({ name: name });
     if (!hive) {
       return res.status(404).json({ message: "Couldn't find the Hive!" });
