@@ -181,7 +181,11 @@ async function deleteHive(req: Request, res: Response): Promise<Response> {
 async function addHiveMember(req: Request, res: Response): Promise<Response> {
   try {
     const name = req.params.name;
+    // prettier-ignore
+    if (!name) { return res.status(404).json({ message: "Please provide a valid name like /api/hive/addhivemember/<name>" }) }
     const { username } = req.body;
+    // prettier-ignore
+    if (!username) { return res.status(400).json({ message: "The attribute username is missing, please provide valid arguments" }) }
     let hive = await HiveModel.findOne({ name: name });
     if (!hive) {
       return res.status(404).json({ message: "Couldn't find the Hive!" });
@@ -219,7 +223,11 @@ async function removeHiveMember(
 ): Promise<Response> {
   try {
     const name = req.params.name;
+    // prettier-ignore
+    if (!name) { return res.status(404).json({ message: "Please provide a valid name like /api/hive/gethive/<name>" }) }
     const { username } = req.body;
+    // prettier-ignore
+    if (!username) { return res.status(400).json({ message: "The attribute username is missing, please provide valid arguments" }) }
     let hive = await HiveModel.findOne({ name: name });
     if (!hive) {
       return res.status(404).json({ message: "Couldn't find the Hive!" });
