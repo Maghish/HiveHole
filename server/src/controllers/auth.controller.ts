@@ -24,6 +24,15 @@ async function signupUser(req: Request, res: Response): Promise<Response> {
   try {
     const { displayName, username, email, password } = req.body;
 
+    // prettier-ignore
+    if (!displayName) { return res.status(400).json({ message: "The attribute displayName is missing, please provide valid arguments" }) }
+    // prettier-ignore
+    if (!username) { return res.status(400).json({ message: "The attribute username is missing, please provide valid arguments" }) }
+    // prettier-ignore
+    if (!email) { return res.status(400).json({ message: "The attribute email is missing, please provide valid arguments" }) }
+    // prettier-ignore
+    if (!password) { return res.status(400).json({ message: "The attribute password is missing, please provide valid arguments" }) }
+
     let user = await UserModel.findOne({ username: username });
     if (user) {
       return res.status(400).json({
@@ -76,6 +85,10 @@ async function signupUser(req: Request, res: Response): Promise<Response> {
 async function loginUser(req: Request, res: Response): Promise<Response> {
   try {
     const { username, email, password } = req.body;
+
+    // prettier-ignore
+    if (!password) { return res.status(400).json({ message: "The attribute password is missing, please provide valid arguments" }) }
+
     if (username) {
       const user = await UserModel.findOne({ username: username });
       if (user && (await compare(password, user!.password))) {
