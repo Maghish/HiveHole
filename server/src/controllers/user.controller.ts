@@ -75,6 +75,39 @@ async function getCurrentUser(req: Request, res: Response): Promise<Response> {
 }
 
 /**
+ * Edits the currently logged in user's credentials/data
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<import("express").Response>}
+ */
+async function editUser(req: Request, res: Response): Promise<Response> {
+  try {
+    let user = await getCurrentUserData(req);
+
+    const { displayName, bio, profilePhoto } = req.body;
+
+    //? The client will eventually deal with characters exeeding errors, etc. So no need to check for character length
+
+    // prettier-ignore
+    if (displayName) { user.displayName = displayName }
+    // prettier-ignore
+    if (bio) { user.bio = bio }
+    // prettier-ignore
+    if (profilePhoto) { user.profilePhoto = profilePhoto }
+
+    user = await user.save();
+    return res.status(200).json({
+      message: `Successfully updated ${displayName}'s credenitals`,
+      user,
+    });
+  } catch (error: any) {
+    return res
+      .status(400)
+      .json({ message: `Unexpected error occurred: ${error.message}` });
+  }
+}
+
+/**
  * Assigns the current user to follow the given user
  * @param {import("express").Request} req
  * @param {import("express").Response} res
@@ -125,12 +158,10 @@ async function unfollowUser(req: Request, res: Response): Promise<Response> {
   try {
     const targetUsername = req.params.username;
     if (!targetUsername) {
-      return res
-        .status(404)
-        .json({
-          message:
-            "Please provide a valid username of the target like /api/user/unfollowuser/<username>",
-        });
+      return res.status(404).json({
+        message:
+          "Please provide a valid username of the target like /api/user/unfollowuser/<username>",
+      });
     }
     let target = await UserModel.findOne({ username: targetUsername });
     if (!target) {
@@ -169,4 +200,5 @@ export {
   getCurrentUserData,
   followUser,
   unfollowUser,
+  editUser,
 };
