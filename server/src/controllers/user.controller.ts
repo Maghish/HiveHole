@@ -34,6 +34,8 @@ async function getCurrentUserData(req: Request): Promise<any | null> {
 async function getUser(req: Request, res: Response): Promise<Response> {
   try {
     const username = req.params.username;
+    // prettier-ignore
+    if (!username) { return res.status(404).json({ message: "Please provide a valid username like /api/user/getuser/<username>" }) }
     const user = await UserModel.findOne({ username: username });
     if (!user) {
       return res.status(404).json({ message: "Couldn't find the user!" });
@@ -81,6 +83,8 @@ async function getCurrentUser(req: Request, res: Response): Promise<Response> {
 async function followUser(req: Request, res: Response): Promise<Response> {
   try {
     const targetUsername = req.params.username;
+    // prettier-ignore
+    if (!targetUsername) { return res.status(404).json({ message: "Please provide a valid username of the target like /api/user/followuser/<username>" }) }
     let target = await UserModel.findOne({ username: targetUsername });
     if (!target) {
       return res.status(404).json({ message: "Could not find the user!" });
@@ -120,6 +124,14 @@ async function followUser(req: Request, res: Response): Promise<Response> {
 async function unfollowUser(req: Request, res: Response): Promise<Response> {
   try {
     const targetUsername = req.params.username;
+    if (!targetUsername) {
+      return res
+        .status(404)
+        .json({
+          message:
+            "Please provide a valid username of the target like /api/user/unfollowuser/<username>",
+        });
+    }
     let target = await UserModel.findOne({ username: targetUsername });
     if (!target) {
       return res.status(404).json({ message: "Could not find the user!" });
