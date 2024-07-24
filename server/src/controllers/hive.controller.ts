@@ -112,15 +112,12 @@ async function updateHive(req: Request, res: Response): Promise<Response> {
         });
       }
 
-      if (displayName) {
-        hive.displayName = displayName;
-      }
-      if (description) {
-        hive.description = description;
-      }
-      if (tags) {
-        hive.tags = tags;
-      }
+      // prettier-ignore
+      if (displayName) { hive.displayName = displayName }
+      // prettier-ignore
+      if (description) { hive.description = description }
+      // prettier-ignore
+      if (tags) { hive.tags = tags }
 
       hive = await hive!.save();
       return res.status(200).json({
