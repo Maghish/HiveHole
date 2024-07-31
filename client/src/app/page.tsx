@@ -2,14 +2,16 @@
 
 import axios from "axios";
 import Sidebar from "@/components/Sidebar";
+import Topbar from "@/components/Topbar";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVERURL;
 
 function Home() {
   return (
-    <main className="bg-black min-w-full h-screen">
+    <div className="bg-black min-w-full h-screen">
       <Sidebar />
-    </main>
+      <Topbar />
+    </div>
   );
 }
 
