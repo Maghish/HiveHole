@@ -1,14 +1,16 @@
 "use client";
 
-import Paragraph from "@/components/paragraph";
 import axios from "axios";
+import Sidebar from "@/components/Sidebar";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVERURL;
 
-export default function Home() {
+function Home() {
   return (
-    <div>
-      <Paragraph />
-    </div>
+    <main className="bg-black min-w-full h-screen">
+      <Sidebar />
+    </main>
   );
 }
+
+export default Home;
