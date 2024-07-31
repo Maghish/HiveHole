@@ -1,11 +1,14 @@
-"use server";
+"use client";
 
-export default async function Home() {
-  const url = process.env.SERVERURL;
+import Paragraph from "@/components/paragraph";
+import axios from "axios";
 
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVERURL;
+
+export default function Home() {
   return (
-    <main>
-      <p>{url}</p>
-    </main>
+    <div>
+      <Paragraph />
+    </div>
   );
 }
