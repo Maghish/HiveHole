@@ -1,6 +1,5 @@
 import Topsearchbar from "./Topsearchbar";
-import { FaBell } from "react-icons/fa6";
-import { FaStar } from "react-icons/fa6";
+
 import { FaUserCircle } from "react-icons/fa";
 
 import Bell from "@/app/assets/Bell.svg";
@@ -34,13 +33,6 @@ function Topbar() {
         >
           <Image alt="favorite" src={favoriteFocused ? OutlineStar : Star} />
         </button>
-
-        {/* <button className="self-center flex items-center cursor-pointer focus:animate-pulse">
-          <FaBell color="#D9D9D9" size="22px" />
-        </button>
-        <button className="self-center flex items-center cursor-pointer focus:animate-pulse">
-          <FaStar color="#D9D9D9" size="22px" />
-        </button> */}
 
         <button className="self-center flex items-center rounded-full bg-gradient-to-r from-green-700 to-green-500 p-[3px] cursor-pointer focus:from-yellow-600 focus:to-yellow-300">
           <div className="w-full h-full bg-black rounded-full">
