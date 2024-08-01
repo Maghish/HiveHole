@@ -1,8 +1,8 @@
 "use client";
 
 import axios from "axios";
-import Sidebar from "@/components/Sidebar";
-import Topbar from "@/components/Topbar";
+import Sidebar from "@/app/components/Sidebar";
+import Topbar from "@/app/components/Topbar";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVERURL;
 
