@@ -3,7 +3,7 @@ import Separator from "./Separator";
 
 function Sidebar() {
   return (
-    <div className="fixed top-0 left-0 h-full bg-[#0c0c0c] w-60 z-30 pt-8 px-4 flex-col justify-center items-center">
+    <div className="fixed top-0 left-0 h-full bg-[#0c0c0c] w-64 z-30 pt-8 px-6 flex-col justify-center items-center">
       {/* <div className="flex-col justify-center items-center"> */}
 
       <h2 className="w-full text-center text-2xl font-jetbrains-mono-bold text-white">
@@ -36,7 +36,12 @@ function Sidebar() {
 
       <Separator />
 
-      <div className=""></div>
+      <div className="flex-col mt-2">
+        <h4 className="font-jetbrains-mono-bold text-lg text-white px-3">
+          Hives
+        </h4>
+        {/* List of Hives will be displayed */}
+      </div>
 
       {/* </div> */}
     </div>
