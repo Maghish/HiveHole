@@ -15,7 +15,7 @@ function Home() {
 
   useEffect(() => {
     if (mode !== "User") {
-      redirect("/auth/login");
+      redirect("/auth/signup");
     }
   }, []);
 
