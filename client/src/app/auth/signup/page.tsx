@@ -4,6 +4,7 @@ import SetCookie from "@/app/util/SetCookie";
 import axios from "axios";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import { RedirectUser } from "./RedirectUser";
 
 function page() {
   const [username, setUsername] = useState<string>("testsubject");
@@ -34,7 +35,7 @@ function page() {
 
     if (!anyError) {
       // Redirect not working
-      // return redirect("/auth/login");
+      RedirectUser();
     }
   }
 
