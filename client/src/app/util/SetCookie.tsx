@@ -1,6 +1,8 @@
+"use server";
+
 import Cookie from "js-cookie";
 
-function SetCookie(cookieName: string, value: string) {
+async function SetCookie(cookieName: string, value: string) {
   Cookie.set(cookieName, value, {
     expires: 30,
     secure: true,
