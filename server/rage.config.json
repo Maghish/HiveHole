@@ -1,0 +1,14 @@
+{
+  "method": "PAI",
+  "methodSpecificSettings": {
+    "interval": 20000
+  },
+  "databaseType": "MongoDB",
+  "databaseSpecificSettings": {
+    "secretKey": "mongodb+srv://Maghish:maghish2010@hivehole.jaiemg8.mongodb.net/?retryWrites=true&w=majority",
+    "dbs": ["test"],
+    "excludeCollections": [""]
+  },
+  "loopStartDelay": 10000,
+  "outDir": "db"
+}

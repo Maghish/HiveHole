@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rage-js/atlas": "latest",
+    "@rage-js/core": "^2.0.1",
+    "@rage-js/tools": "latest",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

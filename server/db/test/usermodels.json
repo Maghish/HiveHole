@@ -1,0 +1,34 @@
+[
+  {
+    "displayName": "Adam <First Guy>",
+    "username": "firstguyadam",
+    "email": "firstguyadam@hivehole.com",
+    "password": "$2a$10$zrYkE1WE90V/eM/pkGegj..iCE0ATAeTEFyTg3i7nplxsDYrRfkdW",
+    "bio": "Hola! I'm the first user in HiveHole!",
+    "profilePhoto": "",
+    "followers": 0,
+    "following": [],
+    "onlineStatus": "Online",
+    "lastLogin": "1721768306491",
+    "createdAt": "2024-07-23T21:01:22.211Z",
+    "updatedAt": "2024-07-24T18:12:58.819Z",
+    "__v": 0,
+    "id": "66a01a22d8dc9dfe17ec31a0"
+  },
+  {
+    "displayName": "Test Subject",
+    "username": "testsubject",
+    "email": "testsubject@hive.com",
+    "password": "$2a$10$iXadJCr7qdwM3BPJqMRx8OaWZo.dLtq4alMhI5iQ3Ct73CzoIWKRC",
+    "bio": "Hello! I'm new to HiveHole!",
+    "profilePhoto": "",
+    "followers": 0,
+    "following": [],
+    "onlineStatus": "Online",
+    "lastLogin": "1723999154272",
+    "createdAt": "2024-08-18T16:43:58.630Z",
+    "updatedAt": "2024-08-18T16:43:58.630Z",
+    "__v": 0,
+    "id": "66c224cef04914386a16c380"
+  }
+]
