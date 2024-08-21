@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import { App } from "@rage-js/core";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 
 import hiveRoute from "./routes/hive.route";
 import userRoute from "./routes/user.route";
