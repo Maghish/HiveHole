@@ -37,7 +37,7 @@ async function start() {
 
 start();
 
-process.on("SIGINT", async () => {
+process.on("SIGINT" || "SIGQUIT", async () => {
   await rageApp.stop();
   process.exit(0);
 });
