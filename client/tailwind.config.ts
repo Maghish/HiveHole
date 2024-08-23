@@ -7,7 +7,15 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        FormModal: "0 5px 30px 10px rgba(255,255,255,0.4)",
+      },
+      colors: {
+        PrimaryBackgroundColor: "#000000",
+        SecondaryBackgroundColor: "#1f1f1f",
+      },
+    },
   },
   plugins: [],
 };
