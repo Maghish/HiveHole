@@ -7,7 +7,6 @@ import Topbar from "@/app/components/Topbar";
 import SignupForm from "./components/authForms/SignupForm";
 
 import { AuthContext } from "./contexts/AuthContext";
-import { redirect } from "next/navigation";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVERURL;
 
