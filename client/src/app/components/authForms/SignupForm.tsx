@@ -67,7 +67,7 @@ function SignupForn() {
           </div>
         </div>
 
-        <button className="mt-auto self-center w-28 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular bg-blue-600 ring-4 ring-blue-700 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-20 hover:ring-opacity-80">
+        <button className="mt-auto self-center w-28 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-bold text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80">
           Sign Up
         </button>
       </form>
