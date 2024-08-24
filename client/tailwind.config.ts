@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       boxShadow: {
-        FormModal: "0 5px 30px 10px rgba(255,255,255,0.4)",
+        FormModal: "0 5px 30px 5px rgba(255,255,255,0.4)",
       },
       colors: {
         PrimaryBackgroundColor: "#000000",
