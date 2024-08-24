@@ -1,7 +1,17 @@
+import { IoMdClose } from "react-icons/io";
+
 function SignupForn() {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-      <form className="max-w-[400px] w-[400px] max-h-[500px] h-[500px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
+      <form className="relative max-w-[400px] w-[400px] max-h-[500px] h-[500px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
+        <IoMdClose
+          className="absolute top-4 right-4 cursor-pointer transition-all ease-out duration-100 hover:bg-white hover:bg-opacity-15 rounded-full p-1.5"
+          // onClick={() => {
+          //   console.log("Close!");
+          // }}
+          size="28px"
+          color="#FFFFFF"
+        />
         <h3 className="text-white font-jetbrains-mono-regular text-center text-lg">
           Sign Up
         </h3>
