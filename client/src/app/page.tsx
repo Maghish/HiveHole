@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "@/app/components/Sidebar";
 import Topbar from "@/app/components/Topbar";
@@ -12,6 +12,15 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVERURL;
 
 function Home() {
   const { mode, userData } = useContext(AuthContext);
+  const [signupFormVisible, setSignupFormVisible] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (mode === "Guest") {
+      if (!signupFormVisible) {
+        setSignupFormVisible(true);
+      }
+    }
+  }, [mode]);
 
   return (
     <div className="bg-black min-w-full h-screen">
@@ -27,7 +36,13 @@ function Home() {
               You need to logged in!
             </p>
           </div>
-          <SignupForm />
+          {signupFormVisible ? (
+            <SignupForm
+              setSignupFormVisibility={(v: boolean) => setSignupFormVisible(v)}
+            />
+          ) : (
+            ""
+          )}
         </Fragment>
       )}
     </div>

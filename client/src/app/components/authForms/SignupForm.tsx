@@ -1,14 +1,18 @@
 import { IoMdClose } from "react-icons/io";
 
-function SignupForm() {
+interface SignupFormProps {
+  setSignupFormVisibility: (v: boolean) => void;
+}
+
+function SignupForm({ setSignupFormVisibility }: SignupFormProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
       <form className="relative max-w-[400px] w-[400px] max-h-[500px] h-[500px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
         <IoMdClose
           className="absolute top-4 right-4 cursor-pointer transition-all ease-out duration-100 hover:bg-white hover:bg-opacity-15 rounded-full p-1.5"
-          // onClick={() => {
-          //   console.log("Close!");
-          // }}
+          onClick={() => {
+            setSignupFormVisibility(false);
+          }}
           size="28px"
           color="#FFFFFF"
         />
@@ -67,7 +71,7 @@ function SignupForm() {
           </div>
         </div>
 
-        <button className="mt-auto self-center w-28 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-bold text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80">
+        <button className="mt-auto self-center w-28 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80">
           Sign Up
         </button>
       </form>
