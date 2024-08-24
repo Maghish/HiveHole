@@ -1,6 +1,6 @@
 import { IoMdClose } from "react-icons/io";
 
-function SignupForn() {
+function SignupForm() {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
       <form className="relative max-w-[400px] w-[400px] max-h-[500px] h-[500px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
@@ -75,4 +75,4 @@ function SignupForn() {
   );
 }
 
-export default SignupForn;
+export default SignupForm;
