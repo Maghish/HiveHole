@@ -31,10 +31,16 @@ function Home() {
         </>
       ) : (
         <Fragment>
-          <div className="absolute min-w-full h-screen flex items-center justify-center">
+          <div className="absolute min-w-full h-screen flex items-center justify-center flex-col">
             <p className="text-center text-xl font-jetbrains-mono-bold text-white">
               You need to logged in!
             </p>
+            <span
+              className="text-blue-500 font-jetbrains-mono-bold underline mt-3 cursor-pointer transition-all ease-linear hover:brightness-125"
+              onClick={() => setSignupFormVisible(true)}
+            >
+              Sign up
+            </span>
           </div>
           {signupFormVisible ? (
             <SignupForm
