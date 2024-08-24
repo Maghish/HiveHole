@@ -14,6 +14,10 @@ const config: Config = {
       colors: {
         PrimaryBackgroundColor: "#000000",
         SecondaryBackgroundColor: "#1f1f1f",
+        ModalPrimaryTextColor: "#FFFFFF",
+        ModalSecondaryTextColor: "#c1c1c1",
+        ModalRingColor: "#555555",
+        ModalBackgroundColor: "#2a2a2a",
       },
     },
   },
