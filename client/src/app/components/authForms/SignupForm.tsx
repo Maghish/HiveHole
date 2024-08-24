@@ -2,9 +2,13 @@ import { IoMdClose } from "react-icons/io";
 
 interface SignupFormProps {
   setSignupFormVisibility: (v: boolean) => void;
+  setLoginFormVisibility: (v: boolean) => void;
 }
 
-function SignupForm({ setSignupFormVisibility }: SignupFormProps) {
+function SignupForm({
+  setSignupFormVisibility,
+  setLoginFormVisibility,
+}: SignupFormProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
       <form className="relative max-w-[400px] w-[400px] max-h-[525px] h-[525px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
@@ -81,6 +85,7 @@ function SignupForm({ setSignupFormVisibility }: SignupFormProps) {
             className="text-blue-500 font-jetbrains-mono-regular underline ml-1 cursor-pointer transition-all ease-linear hover:brightness-125"
             onClick={() => {
               setSignupFormVisibility(false);
+              setLoginFormVisibility(true);
             }}
           >
             Login
