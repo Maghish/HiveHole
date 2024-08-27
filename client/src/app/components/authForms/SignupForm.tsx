@@ -25,7 +25,9 @@ function SignupForm({
       password,
     });
 
-    SetCookie("token", response.token);
+    if (response.token) {
+      SetCookie("token", response.token);
+    }
   }
 
   return (
