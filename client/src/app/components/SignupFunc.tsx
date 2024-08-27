@@ -1,8 +1,5 @@
 "use server";
 
-import axios from "axios";
-import SetCookie from "../util/SetCookie";
-
 interface SignupFuncProps {
   username: string;
   displayName: string;
@@ -34,12 +31,11 @@ async function SignupFunc({
     );
 
     const data = await response.json();
-    SetCookie("token", data.token);
 
     return data;
   } catch (error: any) {
     console.error(error);
-    return `Error: ${error}`;
+    return `Unexpected error occurred: ${error}`;
   }
 }
 

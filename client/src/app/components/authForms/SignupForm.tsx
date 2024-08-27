@@ -1,6 +1,7 @@
 import { IoMdClose } from "react-icons/io";
 import SignupFunc from "@/app/components/SignupFunc";
 import { useState } from "react";
+import SetCookie from "@/app/util/SetCookie";
 
 interface SignupFormProps {
   setSignupFormVisibility: (v: boolean) => void;
@@ -23,6 +24,8 @@ function SignupForm({
       email,
       password,
     });
+
+    SetCookie("token", response.token);
   }
 
   return (

@@ -1,5 +1,3 @@
-"use server";
-
 import Cookie from "js-cookie";
 
 async function SetCookie(cookieName: string, value: string) {
