@@ -12,10 +12,10 @@ function SignupForm({
   setSignupFormVisibility,
   setLoginFormVisibility,
 }: SignupFormProps) {
-  const [username, setUsername] = useState<string>("username");
-  const [displayName, setDisplayName] = useState<string>("Username");
-  const [email, setEmail] = useState<string>("username@gmail.com");
-  const [password, setPassword] = useState<string>("username");
+  const [username, setUsername] = useState<string>("");
+  const [displayName, setDisplayName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   async function SignupUser() {
     const response = await SignupFunc({
@@ -25,8 +25,12 @@ function SignupForm({
       password,
     });
 
+    // If response has properties like token, it means that it is not undefined and it's well-fetched
     if (response.token) {
       SetCookie("token", response.token);
+
+      setSignupFormVisibility(false);
+      window.location.reload();
     }
   }
 
@@ -54,6 +58,9 @@ function SignupForm({
               id="username"
               type="text"
               placeholder="Enter your username"
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
               required
             />
           </div>
@@ -67,6 +74,9 @@ function SignupForm({
               id="displayname"
               type="text"
               placeholder="Enter your display name"
+              onChange={(e) => {
+                setDisplayName(e.target.value);
+              }}
               required
             />
           </div>
@@ -79,6 +89,9 @@ function SignupForm({
               id="email"
               type="email"
               placeholder="Enter your email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
               required
             />
           </div>
@@ -91,6 +104,9 @@ function SignupForm({
               id="password"
               type="password"
               placeholder="Enter your password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               required
             />
           </div>
