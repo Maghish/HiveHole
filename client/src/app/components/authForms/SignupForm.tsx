@@ -1,4 +1,6 @@
 import { IoMdClose } from "react-icons/io";
+import SignupFunc from "@/app/components/SignupFunc";
+import { useState } from "react";
 
 interface SignupFormProps {
   setSignupFormVisibility: (v: boolean) => void;
@@ -9,6 +11,20 @@ function SignupForm({
   setSignupFormVisibility,
   setLoginFormVisibility,
 }: SignupFormProps) {
+  const [username, setUsername] = useState<string>("username");
+  const [displayName, setDisplayName] = useState<string>("Username");
+  const [email, setEmail] = useState<string>("username@gmail.com");
+  const [password, setPassword] = useState<string>("username");
+
+  async function SignupUser() {
+    const response = await SignupFunc({
+      username,
+      displayName,
+      email,
+      password,
+    });
+  }
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
       <form className="relative max-w-[400px] w-[400px] max-h-[525px] h-[525px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
@@ -75,7 +91,11 @@ function SignupForm({
           </div>
         </div>
 
-        <button className="mt-auto self-center w-28 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80">
+        <button
+          type="button"
+          className="mt-auto self-center w-28 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80"
+          onClick={() => SignupUser()}
+        >
           Sign Up
         </button>
 
