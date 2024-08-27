@@ -1,6 +1,5 @@
 "use client";
-import { useContext, createContext, useState, useEffect } from "react";
-import axios from "axios";
+import { createContext, useState, useEffect } from "react";
 import GetCookie from "../util/GetCookie";
 
 export const AuthContext = createContext<any>(null);
@@ -11,11 +10,25 @@ export const AuthContextProvider = ({ children }: any) => {
   const [userData, setUserData] = useState<any>();
 
   useEffect(() => {
+    const token = GetCookie("token");
+
     async function getCurrentUser() {
       try {
-        const response = await axios.get("/user/getcurrentuser");
-        if (response.data.user) {
-          setUserData(response.data.user);
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_SERVERURL}/user/getcurrentuser`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              // prettier-ignore
+              "Authorization": 'Bearer ' + token,
+            },
+          }
+        );
+        const data = await response.json();
+
+        if (data.user) {
+          setUserData(data.user);
           return true;
         } else {
           return false;
@@ -25,9 +38,7 @@ export const AuthContextProvider = ({ children }: any) => {
       }
     }
 
-    const token = GetCookie("token");
     if (token) {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       getCurrentUser().then((response: boolean) => {
         if (response) {
           setResult("User");
@@ -38,7 +49,6 @@ export const AuthContextProvider = ({ children }: any) => {
         }
       });
     } else {
-      delete axios.defaults.headers.common["Authorization"];
       setUserData(null);
       setResult("Guest");
       setRequestComplete(true);
