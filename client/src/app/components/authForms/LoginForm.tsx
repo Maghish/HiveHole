@@ -1,4 +1,7 @@
+import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import LoginFunc from "../LoginFunc";
+import SetCookie from "@/app/util/SetCookie";
 
 interface LoginFormProps {
   setLoginFormVisibility: (v: boolean) => void;
@@ -9,6 +12,24 @@ function LoginForm({
   setLoginFormVisibility,
   setSignupFormVisibility,
 }: LoginFormProps) {
+  const [username, setUsername] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  async function LoginUser() {
+    const response = await LoginFunc({ username, email, password });
+
+    console.log(response);
+
+    // If response has properties like token, it means that it is not undefined and it's well-fetched
+    if (response.token) {
+      SetCookie("token", response.token);
+
+      setLoginFormVisibility(false);
+      window.location.reload();
+    }
+  }
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
       <form className="relative max-w-[400px] w-[400px] max-h-[525px] h-[525px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
@@ -33,6 +54,9 @@ function LoginForm({
               id="username"
               type="text"
               placeholder="Enter your username"
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
               required
             />
           </div>
@@ -45,6 +69,9 @@ function LoginForm({
               id="email"
               type="email"
               placeholder="Enter your email"
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
               required
             />
           </div>
@@ -57,12 +84,19 @@ function LoginForm({
               id="password"
               type="password"
               placeholder="Enter your password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               required
             />
           </div>
         </div>
 
-        <button className="mt-auto self-center w-28 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80">
+        <button
+          type="button"
+          className="mt-auto self-center w-28 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80"
+          onClick={() => LoginUser()}
+        >
           Login
         </button>
 

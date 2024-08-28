@@ -17,7 +17,7 @@ function Home() {
   useEffect(() => {
     if (mode === "Guest") {
       if (!signupFormVisible) {
-        setSignupFormVisible(true);
+        setLoginFormVisible(true);
       }
     }
   }, [mode]);
