@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, useContext, useEffect, useState } from "react";
-import axios from "axios";
 import Sidebar from "@/app/components/Sidebar";
 import Topbar from "@/app/components/Topbar";
 
@@ -9,8 +8,6 @@ import SignupForm from "./components/authForms/SignupForm";
 import LoginForm from "./components/authForms/LoginForm";
 
 import { AuthContext } from "./contexts/AuthContext";
-
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_SERVERURL;
 
 function Home() {
   const { mode, userData } = useContext(AuthContext);
