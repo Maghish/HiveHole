@@ -35,7 +35,7 @@ async function SignupFunc({
     return data;
   } catch (error: any) {
     console.error(error);
-    return `Unexpected error occurred: ${error}`;
+    return { message: `Unexpected error occurred: ${error}` };
   }
 }
 
