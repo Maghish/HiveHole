@@ -29,8 +29,18 @@ function LoginForm({
       return false;
     }
 
+    if (username.length > 12) {
+      setErrorBox("Username must be at most 12 characters long");
+      return false;
+    }
+
     if (email.length < 5) {
       setErrorBox("Email must be at least 5 characters long");
+      return false;
+    }
+
+    if (email.length > 30) {
+      setErrorBox("Email must be at most 30 characters long");
       return false;
     }
 
