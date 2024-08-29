@@ -2,6 +2,7 @@ import { IoMdClose } from "react-icons/io";
 import SignupFunc from "@/app/components/SignupFunc";
 import { useState } from "react";
 import SetCookie from "@/app/util/SetCookie";
+import FormErrorBox from "../FormErrorBox";
 
 interface SignupFormProps {
   setSignupFormVisibility: (v: boolean) => void;
@@ -16,8 +17,37 @@ function SignupForm({
   const [displayName, setDisplayName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [errorBox, setErrorBox] = useState<false | string>(false);
+
+  async function errorChecks() {
+    if (username == "" || email == "" || displayName == "" || password == "") {
+      setErrorBox("Please fill up all fields");
+      return false;
+    }
+
+    if (username.length < 6) {
+      setErrorBox("Username must be at least 6 characters long");
+      return false;
+    }
+
+    if (displayName.length < 3) {
+      setErrorBox("Display name must be at least 3 characters long");
+      return false;
+    }
+
+    if (email.length < 5) {
+      setErrorBox("Email must be at least 5 characters long");
+      return false;
+    }
+
+    return true;
+  }
 
   async function SignupUser() {
+    if (!(await errorChecks())) {
+      return;
+    }
+
     const response = await SignupFunc({
       username,
       displayName,
@@ -31,12 +61,17 @@ function SignupForm({
 
       setSignupFormVisibility(false);
       window.location.reload();
+
+      return;
+    } else {
+      setErrorBox(response.message);
+      return;
     }
   }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-      <form className="relative max-w-[400px] w-[400px] max-h-[525px] h-[525px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
+      <form className="relative max-w-[400px] w-[400px] max-h-[580px] h-[580px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
         <IoMdClose
           className="absolute top-4 right-4 cursor-pointer transition-all ease-out duration-100 hover:bg-white hover:bg-opacity-15 rounded-full p-1.5"
           onClick={() => {
@@ -48,7 +83,10 @@ function SignupForm({
         <h3 className="text-white font-jetbrains-mono-regular text-center text-lg">
           Sign Up
         </h3>
-        <div className=" mt-3 flex flex-col gap-y-4">
+
+        {errorBox != false ? <FormErrorBox error={errorBox} /> : ""}
+
+        <div className="mt-3 flex flex-col gap-y-4">
           <div className="flex flex-col gap-y-2">
             <label className="text-ModalSecondaryTextColor font-jetbrains-mono-regular text-sm ml-1">
               Username
