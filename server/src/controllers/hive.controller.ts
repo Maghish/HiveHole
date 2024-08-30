@@ -32,6 +32,35 @@ async function getHive(req: Request, res: Response): Promise<Response> {
 }
 
 /**
+ * Get the user's subscribed (hives that the user is a member of) hives
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @returns {Promise<import("express").Response>}
+ */
+async function getUsersHives(req: Request, res: Response): Promise<Response> {
+  try {
+    const user = await getCurrentUserData(req);
+
+    const totalHives = await HiveModel.find({});
+    var hives: any[] = [];
+
+    totalHives.forEach((hive) => {
+      if (hive.members.includes(user.username)) {
+        hives.push(hive);
+      }
+    });
+
+    return res
+      .status(200)
+      .json({ message: "Successfully fetched the hives", hives: hives });
+  } catch (error: any) {
+    return res
+      .status(400)
+      .json({ message: `Unexpected error occurred: ${error.message}` });
+  }
+}
+
+/**
  * Create a hive with the given arguments
  * @param {import("express").Request} req
  * @param {import("express").Response} res
@@ -258,6 +287,7 @@ async function removeHiveMember(
 
 export {
   getHive,
+  getUsersHives,
   createHive,
   updateHive,
   deleteHive,
