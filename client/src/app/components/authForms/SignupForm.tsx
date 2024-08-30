@@ -86,7 +86,7 @@ function SignupForm({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-      <form className="relative max-w-[300px] md:max-w-[400px] w-[300px] md:w-[400px] max-h-[560px] md:max-h-[580px] h-[560px] md:h-[580px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-6 md:px-12 py-8 md:py-10">
+      <form className="relative max-w-[300px] sm:max-w-[400px] w-[300px] sm:w-[400px] max-h-[560px] sm:max-h-[580px] h-[560px] sm:h-[580px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-6 sm:px-12 py-8 sm:py-10">
         <IoMdClose
           className="absolute top-4 right-4 cursor-pointer transition-all ease-out duration-100 hover:bg-white hover:bg-opacity-15 rounded-full p-1.5"
           onClick={() => {
@@ -95,7 +95,7 @@ function SignupForm({
           size="28px"
           color="#FFFFFF"
         />
-        <h3 className="text-white font-jetbrains-mono-regular text-center text-base md:text-lg">
+        <h3 className="text-white font-jetbrains-mono-regular text-center text-base sm:text-lg">
           Sign Up
         </h3>
 
@@ -107,7 +107,7 @@ function SignupForm({
               Username
             </label>
             <input
-              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs md:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
+              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs sm:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
               id="username"
               type="text"
               placeholder="Enter your username"
@@ -123,7 +123,7 @@ function SignupForm({
               Display Name
             </label>
             <input
-              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs md:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
+              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs sm:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
               id="displayname"
               type="text"
               placeholder="Enter your display name"
@@ -138,7 +138,7 @@ function SignupForm({
               Email
             </label>
             <input
-              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs md:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
+              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs sm:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
               id="email"
               type="email"
               placeholder="Enter your email"
@@ -153,7 +153,7 @@ function SignupForm({
               Password
             </label>
             <input
-              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs md:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
+              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs sm:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
               id="password"
               type="password"
               placeholder="Enter your password"
