@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import LoginFunc from "../LoginFunc";
+import LoginFunc from "@/app/components/serverComponents/LoginFunc";
 import SetCookie from "@/app/util/SetCookie";
 import FormErrorBox from "../FormErrorBox";
 
