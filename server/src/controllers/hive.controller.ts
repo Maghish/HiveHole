@@ -68,7 +68,7 @@ async function createHive(req: Request, res: Response): Promise<Response> {
       tags: tags,
       owner: owner.username,
       moderators: [],
-      members: [],
+      members: [owner.username],
     });
 
     hive = await hive.save();
