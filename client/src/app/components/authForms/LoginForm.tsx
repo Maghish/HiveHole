@@ -70,7 +70,7 @@ function LoginForm({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-      <form className="relative max-w-[400px] w-[400px] max-h-[560px] h-[560px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-12 py-10">
+      <form className="relative max-w-[300px] md:max-w-[400px] w-[300px] md:w-[400px] max-h-[500px] md:max-h-[560px] h-[500px] md:h-[560px] bg-SecondaryBackgroundColor rounded-2xl shadow-FormModal flex flex-col px-6 md:px-12 py-6 md:py-10">
         <IoMdClose
           className="absolute top-4 right-4 cursor-pointer transition-all ease-out duration-100 hover:bg-white hover:bg-opacity-15 rounded-full p-1.5"
           onClick={() => {
@@ -79,7 +79,7 @@ function LoginForm({
           size="28px"
           color="#FFFFFF"
         />
-        <h3 className="text-white font-jetbrains-mono-regular text-center text-lg">
+        <h3 className="text-white font-jetbrains-mono-regular text-center text-base md:text-lg">
           Login
         </h3>
         {errorBox != false ? <FormErrorBox error={errorBox} /> : ""}
@@ -89,7 +89,7 @@ function LoginForm({
               Username
             </label>
             <input
-              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
+              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs md:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
               id="username"
               type="text"
               placeholder="Enter your username"
@@ -104,7 +104,7 @@ function LoginForm({
               Email
             </label>
             <input
-              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
+              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs md:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
               id="email"
               type="email"
               placeholder="Enter your email"
@@ -119,7 +119,7 @@ function LoginForm({
               Password
             </label>
             <input
-              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
+              className="w-full rounded-lg h-8 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs md:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
               id="password"
               type="password"
               placeholder="Enter your password"
