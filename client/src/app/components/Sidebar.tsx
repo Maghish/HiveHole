@@ -1,7 +1,27 @@
 import { MdOutlineStackedLineChart, MdHome } from "react-icons/md";
 import Separator from "./Separator";
+import { useEffect, useState } from "react";
+import HivesListFunc from "./serverComponents/HivesListFunc";
+import GetCookie from "../util/GetCookie";
 
 function Sidebar() {
+  const [hives, setHives] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function getHives() {
+      const token = GetCookie("token");
+      const response = await HivesListFunc({ token: token! });
+
+      if (response.hives) {
+        setHives(response.hives);
+      }
+
+      console.log(response);
+    }
+
+    getHives();
+  }, []);
+
   return (
     <div className="fixed top-0 left-0 h-full bg-[#0c0c0c] w-64 z-30 pt-8 px-6 flex-col justify-center items-center">
       {/* <div className="flex-col justify-center items-center"> */}
@@ -40,7 +60,13 @@ function Sidebar() {
         <h4 className="font-jetbrains-mono-bold text-lg text-white px-3">
           Hives
         </h4>
-        {/* List of Hives will be displayed */}
+        {hives.map((value: any, index: number) => {
+          return (
+            <p className="font-jetbrains-mono-regular text-white">
+              {value.displayName}
+            </p>
+          );
+        })}
       </div>
 
       {/* </div> */}
