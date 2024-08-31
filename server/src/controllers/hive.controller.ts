@@ -287,7 +287,7 @@ async function removeHiveMember(
 
 export {
   getHive,
-  getUsersHives,
+  getUsersHives, 
   createHive,
   updateHive,
   deleteHive,
