@@ -8,6 +8,7 @@ import SignupForm from "./components/authForms/SignupForm";
 import LoginForm from "./components/authForms/LoginForm";
 
 import { AuthContext } from "./contexts/AuthContext";
+import WelcomeHome from "./components/WelcomeHome";
 
 function Home() {
   const { mode, userData } = useContext(AuthContext);
@@ -23,12 +24,14 @@ function Home() {
   }, [mode]);
 
   return (
-    <div className="bg-black min-w-full h-screen">
+    <div className="bg-black min-w-full h-screen overflow-hidden">
       {mode === "User" ? (
         <>
           <Sidebar />
           <Topbar />
-          <div className="relative top-[60px] left-[256px] w-auto h-full bg-white"></div>
+          <div className="relative top-[60px] left-[256px] w-auto mr-[256px] h-full bg-black flex-col overflow-y-auto overflow-x-hidden">
+            <WelcomeHome />
+          </div>
         </>
       ) : (
         <Fragment>
