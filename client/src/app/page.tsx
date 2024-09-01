@@ -28,6 +28,7 @@ function Home() {
         <>
           <Sidebar />
           <Topbar />
+          <div className="relative top-[60px] left-[256px] w-auto h-full bg-white"></div>
         </>
       ) : (
         <Fragment>
