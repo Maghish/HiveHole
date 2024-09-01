@@ -60,13 +60,21 @@ function Sidebar() {
         <h4 className="font-jetbrains-mono-bold text-lg text-white px-3">
           Hives
         </h4>
-        {hives.map((value: any, index: number) => {
-          return (
-            <p className="font-jetbrains-mono-regular text-white">
-              {value.displayName}
-            </p>
-          );
-        })}
+        <div className="mt-5 flex flex-col gap-y-3 pl-3">
+          {hives.map((value: any, index: number) => {
+            return (
+              <div className="inline-flex gap-x-3 items-center cursor-pointer">
+                <div className="rounded-full bg-stone-100 w-[24px] h-[24px]"></div>
+                <p
+                  className="font-jetbrains-mono-regular text-sm text-white"
+                  key={index}
+                >
+                  {value.displayName}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* </div> */}
