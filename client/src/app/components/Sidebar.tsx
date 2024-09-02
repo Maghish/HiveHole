@@ -3,6 +3,7 @@ import Separator from "./Separator";
 import { useEffect, useState } from "react";
 import HivesListFunc from "./serverComponents/HivesListFunc";
 import GetCookie from "../util/GetCookie";
+import Link from "next/link";
 
 function Sidebar() {
   const [hives, setHives] = useState<any[]>([]);
@@ -81,6 +82,12 @@ function Sidebar() {
             </p>
           )}
         </div>
+
+        <Link href="/createposts">
+          <button className="mt-4 ml-3 w-full h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80">
+            Create Hive
+          </button>
+        </Link>
       </div>
 
       {/* </div> */}
