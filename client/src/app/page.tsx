@@ -1,14 +1,14 @@
 "use client";
 
 import { Fragment, useContext, useEffect, useState } from "react";
-import Sidebar from "@/app/components/Sidebar";
-import Topbar from "@/app/components/Topbar";
+import Sidebar from "@/components/Sidebar";
+import Topbar from "@/components/Topbar";
 
-import SignupForm from "./components/authForms/SignupForm";
-import LoginForm from "./components/authForms/LoginForm";
+import SignupForm from "@/components/authForms/SignupForm";
+import LoginForm from "@/components/authForms/LoginForm";
 
-import { AuthContext } from "./contexts/AuthContext";
-import WelcomeHome from "./components/WelcomeHome";
+import { AuthContext } from "@/contexts/AuthContext";
+import WelcomeHome from "@/components/WelcomeHome";
 
 function Home() {
   const { mode, userData } = useContext(AuthContext);
