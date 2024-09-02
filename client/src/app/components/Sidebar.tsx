@@ -61,19 +61,25 @@ function Sidebar() {
           Hives
         </h4>
         <div className="mt-5 flex flex-col gap-y-3 pl-3">
-          {hives.map((value: any, index: number) => {
-            return (
-              <div className="inline-flex gap-x-3 items-center cursor-pointer">
-                <div className="rounded-full bg-stone-100 w-[24px] h-[24px]"></div>
-                <p
-                  className="font-jetbrains-mono-regular text-sm text-white"
-                  key={index}
-                >
-                  {value.displayName}
-                </p>
-              </div>
-            );
-          })}
+          {hives.length > 0 ? (
+            hives.map((value: any, index: number) => {
+              return (
+                <div className="inline-flex gap-x-3 items-center cursor-pointer">
+                  <div className="rounded-full bg-stone-100 w-[24px] h-[24px]"></div>
+                  <p
+                    className="font-jetbrains-mono-regular text-sm text-white"
+                    key={index}
+                  >
+                    {value.displayName}
+                  </p>
+                </div>
+              );
+            })
+          ) : (
+            <p className="font-jetbrains-mono-regular text-sm text-stone-400">
+              You are not in any hives
+            </p>
+          )}
         </div>
       </div>
 
