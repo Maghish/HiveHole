@@ -6,6 +6,7 @@ import Topbar from "@/components/Topbar";
 
 import SignupForm from "@/components/authForms/SignupForm";
 import LoginForm from "@/components/authForms/LoginForm";
+import CreateHive from "@/components/CreateHive";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import WelcomeHome from "@/components/WelcomeHome";
@@ -14,6 +15,8 @@ function Home() {
   const { mode, userData } = useContext(AuthContext);
   const [signupFormVisible, setSignupFormVisible] = useState<boolean>(false);
   const [loginFormVisible, setLoginFormVisible] = useState<boolean>(false);
+  const [CreateHiveFormVisible, setCreateHiveFormVisible] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (mode === "Guest") {
@@ -27,7 +30,20 @@ function Home() {
     <div className="bg-black min-w-full h-screen overflow-hidden">
       {mode === "User" ? (
         <>
-          <Sidebar />
+          {CreateHiveFormVisible ? (
+            <CreateHive
+              setCreateHiveFormVisibility={(v: boolean) =>
+                setCreateHiveFormVisible(v)
+              }
+            />
+          ) : (
+            ""
+          )}
+          <Sidebar
+            setCreateHiveFormVisibility={(v: boolean) =>
+              setCreateHiveFormVisible(v)
+            }
+          />
           <Topbar />
           <div className="relative top-[60px] left-[256px] w-auto mr-[256px] h-full bg-black flex-col overflow-y-auto overflow-x-hidden">
             <WelcomeHome />

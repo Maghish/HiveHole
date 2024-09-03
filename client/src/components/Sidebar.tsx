@@ -3,9 +3,12 @@ import Separator from "@/components/Separator";
 import { useEffect, useState } from "react";
 import HivesListFunc from "@/components/serverComponents/HivesListFunc";
 import GetCookie from "@/util/GetCookie";
-import Link from "next/link";
 
-function Sidebar() {
+interface SidebarProps {
+  setCreateHiveFormVisibility: (v: boolean) => void;
+}
+
+function Sidebar({ setCreateHiveFormVisibility }: SidebarProps) {
   const [hives, setHives] = useState<any[]>([]);
 
   useEffect(() => {
@@ -16,8 +19,6 @@ function Sidebar() {
       if (response.hives) {
         setHives(response.hives);
       }
-
-      console.log(response);
     }
 
     getHives();
@@ -25,8 +26,6 @@ function Sidebar() {
 
   return (
     <div className="fixed top-0 left-0 h-full bg-[#0c0c0c] w-64 z-30 pt-8 px-6 flex-col justify-center items-center">
-      {/* <div className="flex-col justify-center items-center"> */}
-
       <h2 className="w-full text-center text-2xl font-jetbrains-mono-bold text-white">
         Hive Hole
       </h2>
@@ -65,7 +64,10 @@ function Sidebar() {
           {hives.length > 0 ? (
             hives.map((value: any, index: number) => {
               return (
-                <div className="inline-flex gap-x-3 items-center cursor-pointer">
+                <div
+                  className="inline-flex gap-x-3 items-center cursor-pointer"
+                  key={index}
+                >
                   <div className="rounded-full bg-stone-100 w-[24px] h-[24px]"></div>
                   <p
                     className="font-jetbrains-mono-regular text-sm text-white"
@@ -83,14 +85,13 @@ function Sidebar() {
           )}
         </div>
 
-        <Link href="/createposts">
-          <button className="mt-4 ml-3 w-full h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80">
-            Create Hive
-          </button>
-        </Link>
+        <button
+          onClick={() => setCreateHiveFormVisibility(true)}
+          className="mt-4 ml-3 w-full h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80"
+        >
+          Create Hive
+        </button>
       </div>
-
-      {/* </div> */}
     </div>
   );
 }
