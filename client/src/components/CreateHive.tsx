@@ -21,8 +21,8 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
   const [errorBox, setErrorBox] = useState<false | string>(false);
 
   return (
-    <div className="absolute z-50 inset-0 min-w-screen min-h-screen backdrop-blur-lg bg-black bg-opacity-10 flex justify-center items-center">
-      <form className="relative max-w-[450px] max-h-[550px] w-[450px] h-[550px] bg-ModalBackgroundColor rounded-2xl flex flex-col px-12 py-10">
+    <div className="absolute z-50 inset-0 min-w-screen min-h-screen backdrop-blur-lg bg-black bg-opacity-20 flex justify-center items-center">
+      <form className="relative max-w-[450px] max-h-[550px] w-[450px] h-[550px] bg-ModalBackgroundColor rounded-2xl shadow-FormModal2 flex flex-col px-12 py-10">
         <IoMdClose
           onClick={() => setCreateHiveFormVisibility(false)}
           className="absolute top-4 right-4 cursor-pointer transition-all ease-out duration-100 hover:bg-white hover:bg-opacity-15 rounded-full p-1.5"
