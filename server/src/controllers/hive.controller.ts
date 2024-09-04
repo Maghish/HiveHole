@@ -69,10 +69,9 @@ async function getUsersHives(req: Request, res: Response): Promise<Response> {
 async function createHive(req: Request, res: Response): Promise<Response> {
   try {
     const { displayName, name, description, tags } = req.body;
-    if (!displayName) {
-      const displayName = name;
-    }
 
+    // prettier-ignore
+    if (!displayName) { return res.status(400).json({ message: "The attribute displayName is missing, please provide valid arguments" }) }
     // prettier-ignore
     if (!name) { return res.status(400).json({ message: "The attribute name is missing, please provide valid arguments" }) }
     // prettier-ignore
@@ -287,7 +286,7 @@ async function removeHiveMember(
 
 export {
   getHive,
-  getUsersHives, 
+  getUsersHives,
   createHive,
   updateHive,
   deleteHive,
