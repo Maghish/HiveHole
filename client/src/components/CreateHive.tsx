@@ -97,6 +97,11 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
                     <div
                       key={index}
                       className="flex-shrink-0 w-max h-max px-4 py-1.5 rounded-lg font-jetbrains-mono-regular text-xs bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor cursor-pointer"
+                      onClick={() => {
+                        setTags(tags.filter((tag, i) => i !== index));
+                        // @ts-ignore
+                        tagsInputRef.current.focus();
+                      }}
                     >
                       {value}
                     </div>
@@ -120,9 +125,11 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
                         tagsInputRef.current.value;
 
                       if (inputFieldContent.length > 0) {
-                        setTags([...tags, currentTag]);
-                        // @ts-ignore
-                        tagsInputRef.current.value = "";
+                        if (!tags.includes(inputFieldContent)) {
+                          setTags([...tags, currentTag]);
+                          // @ts-ignore
+                          tagsInputRef.current.value = "";
+                        }
                       }
                     }
                   }}
