@@ -22,7 +22,7 @@ function Sidebar({ setCreateHiveFormVisibility }: SidebarProps) {
     }
 
     getHives();
-  }, []);
+  }, [hives]);
 
   return (
     <div className="fixed top-0 left-0 h-full bg-[#0c0c0c] w-64 z-30 pt-8 px-6 flex-col justify-center items-center">
@@ -68,7 +68,7 @@ function Sidebar({ setCreateHiveFormVisibility }: SidebarProps) {
                   className="inline-flex gap-x-3 items-center cursor-pointer"
                   key={index}
                 >
-                  <div className="rounded-full bg-stone-100 w-[24px] h-[24px]"></div>
+                  <div className="flex-shrink-0 rounded-full bg-stone-100 w-[24px] h-[24px]"></div>
                   <p
                     className="font-jetbrains-mono-regular text-sm text-white"
                     key={index}
