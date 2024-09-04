@@ -3,6 +3,8 @@
 import { useRef, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import FormErrorBox from "./FormErrorBox";
+import CreateHiveFunc from "./serverComponents/CreateHiveFunc";
+import GetCookie from "@/util/GetCookie";
 
 interface CreateHiveProps {
   setCreateHiveFormVisibility: (v: boolean) => void;
@@ -20,9 +22,72 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
 
   const [errorBox, setErrorBox] = useState<false | string>(false);
 
+  async function errorChecks(): Promise<boolean> {
+    if (displayName == "" || name == "") {
+      setErrorBox("Please fill up all fields");
+      return false;
+    }
+
+    if (displayName.length < 6) {
+      setErrorBox("Display name must be at least 6 characters long");
+      return false;
+    }
+
+    if (displayName.length > 30) {
+      setErrorBox("Display name must be at most 30 characters long");
+      return false;
+    }
+
+    if (name.length < 6) {
+      setErrorBox("Name must be at least 6 characters long");
+      return false;
+    }
+
+    if (name.length > 20) {
+      setErrorBox("Name must be at most 20 characters long");
+      return false;
+    }
+
+    if (description.length < 1) {
+      setDescription("No description provided");
+      return true;
+    }
+
+    if (description.length > 200) {
+      setErrorBox("Description must be at most 200 characters long");
+      return false;
+    }
+
+    return true;
+  }
+
+  async function CreateHive() {
+    if (!(await errorChecks())) {
+      return;
+    }
+
+    const token = GetCookie("token");
+    const response = await CreateHiveFunc({
+      displayName: displayName,
+      name: name,
+      description: description,
+      tags: tags,
+      token: token!,
+    });
+
+    // If response has properties like hive, it means that it is not undefined and it's well-fetched
+    if (response.hive) {
+      setErrorBox(response.message);
+      return;
+    } else {
+      setErrorBox(response.message);
+      return;
+    }
+  }
+
   return (
     <div className="absolute z-50 inset-0 min-w-screen min-h-screen backdrop-blur-lg bg-black bg-opacity-20 flex justify-center items-center">
-      <form className="relative max-w-[450px] max-h-[550px] w-[450px] h-[550px] bg-ModalBackgroundColor rounded-2xl shadow-FormModal2 flex flex-col px-12 py-10">
+      <form className="relative max-w-[450px] max-h-[625px] w-[450px] h-[625px] bg-ModalBackgroundColor rounded-2xl shadow-FormModal2 flex flex-col px-12 py-10">
         <IoMdClose
           onClick={() => setCreateHiveFormVisibility(false)}
           className="absolute top-4 right-4 cursor-pointer transition-all ease-out duration-100 hover:bg-white hover:bg-opacity-15 rounded-full p-1.5"
@@ -33,7 +98,7 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
           Create Hive
         </h3>
         {errorBox != false ? <FormErrorBox error={errorBox} /> : ""}
-        <div className="mt-3 flex flex-col gap-y-4">
+        <div className="mt-3 flex flex-col gap-y-3">
           <div className="flex flex-col gap-y-2">
             <label className="text-ModalSecondaryTextColor font-jetbrains-mono-regular text-sm ml-1">
               Display Name
@@ -69,7 +134,7 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
               Description
             </label>
             <textarea
-              className="w-full rounded-lg h-32 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs sm:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
+              className="w-full rounded-lg h-32 min-h-8 max-h-32 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs sm:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor"
               id="description"
               placeholder="Enter the hive's description"
               onChange={(e) => {
@@ -82,7 +147,7 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
             <label className="text-ModalSecondaryTextColor font-jetbrains-mono-regular text-sm ml-1">
               Tags <span className="text-xs">(Maximum 3 tags)</span>
             </label>
-            <div className="relative flex flex-row gap-x-4 items-center w-full rounded-lg h-14 font-jetbrains-mono-regular px-4 py-2 outline-none text-xs sm:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor">
+            <div className="relative flex flex-row gap-x-4 items-center w-full rounded-lg h-12 font-jetbrains-mono-regular px-3 py-1 outline-none text-xs sm:text-sm bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor">
               {/* <div className="inline-flex items-center gap-x-2 w-max h-max pl-4 pr-2 py-1 rounded-lg font-jetbrains-mono-regular text-xs bg-ModalBackgroundColor text-ModalPrimaryTextColor ring-2 ring-ModalRingColor cursor-pointer">
                 Tag 1
                 <IoMdClose
@@ -141,6 +206,14 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
             </div>
           </div>
         </div>
+
+        <button
+          type="button"
+          className="mt-auto self-center w-36 h-10 rounded-lg px-5 py-2 font-jetbrains-mono-regular text-sm bg-[#334155] bg-opacity-20 ring-2 ring-blue-500 text-ModalPrimaryTextColor transition-all ease-linear duration-100 hover:bg-opacity-60 hover:ring-opacity-80"
+          onClick={() => CreateHive()}
+        >
+          Create Hive
+        </button>
       </form>
     </div>
   );
