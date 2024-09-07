@@ -16,3 +16,11 @@
   font-weight: 600;
   font-style: normal;
 }
+
+nextjs-portal {
+  display: none !important;
+}
+
+/* nextjs-toast-errors-parent {
+  display: none !important;
+} */
