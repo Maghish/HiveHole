@@ -9,6 +9,8 @@ interface SidebarProps {
 }
 
 function Sidebar({ setCreateHiveFormVisibility }: SidebarProps) {
+  const [hivesUpdateFirstIteration, setHivesUpdateFirstIteration] =
+    useState<boolean>(true);
   const [hives, setHives] = useState<any[]>([]);
 
   useEffect(() => {
@@ -21,7 +23,16 @@ function Sidebar({ setCreateHiveFormVisibility }: SidebarProps) {
       }
     }
 
-    getHives();
+    if (hivesUpdateFirstIteration === true) {
+      getHives();
+      setHivesUpdateFirstIteration(false);
+    } else {
+      const intervalId = setInterval(() => {
+        getHives();
+      }, 120000);
+
+      return () => clearInterval(intervalId);
+    }
   }, [hives]);
 
   return (
