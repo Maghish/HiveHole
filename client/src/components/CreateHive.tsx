@@ -77,7 +77,8 @@ function CreateHive({ setCreateHiveFormVisibility }: CreateHiveProps) {
 
     // If response has properties like hive, it means that it is not undefined and it's well-fetched
     if (response.hive) {
-      setErrorBox(response.message);
+      setCreateHiveFormVisibility(false);
+      // Rediect to the hive page
       return;
     } else {
       setErrorBox(response.message);
